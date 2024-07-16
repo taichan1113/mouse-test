@@ -15,5 +15,5 @@
                 &trans     &trans                           &trans     &trans
       >;
     };
-  }
-}
+  };
+};
