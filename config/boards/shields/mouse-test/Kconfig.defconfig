@@ -1,0 +1,9 @@
+if SHIELD_MOUSE_TEST
+
+config ZMK_KEYBOARD_NAME
+    default "mouse_test"
+
+endif
+
+config SPI
+	default y

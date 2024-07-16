@@ -1,20 +1,58 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,matrix_transform = &default_transform;
+    };
+        
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-charlieplex";
+        label = "KSCAN";
+
+        gpios
+        = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+        , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+        , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+        , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+        , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
+    };
+
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        rows = <3>;
+        columns = <8>;
+        map = <
+            RC(1,0) RC(3,0) RC(2,1) RC(0,2) RC(3,2) RC(0,3) RC(4,3) RC(2,4)   
+            RC(2,0) RC(4,0) RC(3,1) RC(1,2) RC(4,2) RC(1,3) RC(0,4) RC(3,4)
+                    RC(0,1) RC(4,1)                 RC(2,3) RC(1,4)
+        >;
+    };
+};
+
 &pinctrl {
     spi0_default: spi0_default {
+
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                <NRF_PSEL(SPIM_MISO, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 14)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 14)>;
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                <NRF_PSEL(SPIM_MISO, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 14)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 14)>;
             low-power-enable;
         };
     };
+};
+
+&uart0 {
+    status = "disabled";
 };
 
 &spi0 {
@@ -23,24 +61,27 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        
-        // scroll-layers = <1>;
-        // snipe-layers = <>;
-        // automouse-layer = <5>;
+        irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        duplex = <2048>; // required by 3-wire spi
+
+        /*   optional features   */
+        // snipe-layers = <1>;
+        scroll-layers = <1 3 6>;
+        //automouse-layer = <2>;
     };
 };
 
 / {
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-    };
-};
+  trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+  };
+}; 
+
