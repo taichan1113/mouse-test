@@ -1,6 +1,6 @@
 file_format: "1"
-id: test
-name: Test
+id: mouse_test
+name: mouse_est
 type: shield
 url: https://github.com/taichan1113/mouse-test
 requires: [seeeduino_xiao_ble]
