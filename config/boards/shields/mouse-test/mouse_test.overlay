@@ -3,33 +3,46 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        // zmk,matrix_transform = &default_transform;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        input-gpios
+            = <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            ;
     };
         
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-charlieplex";
-        label = "KSCAN";
+    // kscan0: kscan {
+    //     compatible = "zmk,kscan-gpio-charlieplex";
+    //     label = "KSCAN";
 
-        gpios
-        = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-        , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
-        // gpios
-        // = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-        // , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-        // , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-        // , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-        // , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
-    };
+    //     gpios
+    //     = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+    //     , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
+    //     // gpios
+    //     // = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+    //     // , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+    //     // , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+    //     // , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
+    //     // , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
+    // };
 
 
-    default_transform: keymap_transform_0 {
-        compatible = "zmk,matrix-transform";
-        rows = <3>;
-        columns = <8>;
-        map = <
-            RC(1,0) 
-        >;
-    };
+    // default_transform: keymap_transform_0 {
+    //     compatible = "zmk,matrix-transform";
+    //     rows = <2>;
+    //     columns = <4>;
+    //     map = <
+    //         RC(1,0)
+    //     >;
+    // };
 };
 
 &pinctrl {
@@ -69,7 +82,7 @@
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         duplex = <2048>; // required by 3-wire spi
 
         /*   optional features   */
