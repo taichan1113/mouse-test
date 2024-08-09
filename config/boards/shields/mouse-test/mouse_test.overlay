@@ -18,22 +18,6 @@
             , <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             ;
     };
-        
-    // kscan0: kscan {
-    //     compatible = "zmk,kscan-gpio-charlieplex";
-    //     label = "KSCAN";
-
-    //     gpios
-    //     = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-    //     , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
-    //     // gpios
-    //     // = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-    //     // , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-    //     // , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-    //     // , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >
-    //     // , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) >;
-    // };
-
 
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
@@ -88,7 +72,7 @@
 
         /*   optional features   */
         // snipe-layers = <1>;
-        // scroll-layers = <1 3 6>;
+        scroll-layers = <1>;
         //automouse-layer = <2>;
     };
 };
