@@ -17,7 +17,9 @@
       >;
     };
     mouse_layer {
-      &trans &trans &trans &trans &trans &trans
-    }
+      bindings = <
+        &trans &trans &trans &trans &trans &trans
+      >;
+    };
   };
 };
