@@ -7,18 +7,33 @@
 
 #define DEFAULT 0
 #define MOUSE 1
+#define DEVICE 2
+#define BLTH 3
 
 / {
   keymap {
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &mkp MB4 &mkp MB5 &mkp MCLK &mo MOUSE  &mkp LCLK &mkp RCLK
+        &lt BLTH MB4 &lt DEVICE MB5 &mkp MCLK &lt MOUSE MCLK
+        &mkp LCLK                             &mkp RCLK
       >;
     };
     mouse_layer {
       bindings = <
-        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans
+        &trans               &trans
+      >;
+    };
+    device_layer {
+      bindings = <
+        &bootloader &trans &trans &trans
+        &trans                    &bt BT_CLR
+      >;
+    }bluetooth_layer {
+      bindings = <
+        &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2
+        &bt BT_SEL 3                     &bt BT_SEL 4
       >;
     };
   };
