@@ -11,12 +11,22 @@
 #define BLTH 3
 
 / {
+  behaviors {
+    ltm: layer-tap-or-mouse {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      hold-while-undecided;
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&mkp>;
+    };
+  };
   keymap {
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &lt BLTH MB4 &lt DEVICE MB5 &mkp MCLK &lt MOUSE MCLK
-        &mkp LCLK                             &mkp RCLK
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &ltm MOUSE MCLK
+        &mkp LCLK                               &mkp RCLK
       >;
     };
     mouse_layer {
