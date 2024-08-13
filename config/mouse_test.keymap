@@ -33,7 +33,7 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &ltm MOUSE MOUSE
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &ltg MOUSE MOUSE
         &mkp LCLK                               &mkp RCLK
       >;
     };
