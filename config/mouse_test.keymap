@@ -20,26 +20,26 @@
       tapping-term-ms = <200>;
       bindings = <&mo>, <&mkp>;
     };
-    mtg: momentary-and-toggle {
+    mto: momentary-and-toggle {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "hold-preferred";
       hold-while-undecided;
       tapping-term-ms = <200>;
-      bindings = <&mo>, <&tog>;
+      bindings = <&mo>, <&to>;
     };
   };
   keymap {
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &mtg MOUSE MOUSE
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &mto MOUSE MOUSE
         &mkp LCLK                               &mkp RCLK
       >;
     };
     mouse_layer {
       bindings = <
-        &trans &trans &trans &trans
+        &trans &trans &trans &to DEFAULT
         &trans               &trans
       >;
     };
