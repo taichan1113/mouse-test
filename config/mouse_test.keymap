@@ -33,9 +33,8 @@
       #binding-cells = <1>;
       bindings = <&mkp>;
       // release-after-ms = <5000>;
-      quick-release;
+      // quick-release;
     };
-
     mbl: mouse_button_long_press  {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
