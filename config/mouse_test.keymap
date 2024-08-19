@@ -34,7 +34,7 @@
       flavor = "hold-preferred";
       hold-while-undecided;
       tapping-term-ms = <200>;
-      bindings = <&mkp>, <&kp>;
+      bindings = <&mkp>, <&mkp>;
     };
     mto: momentary-and-toggle {
       compatible = "zmk,behavior-hold-tap";
@@ -63,7 +63,7 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &hto RCLK MCLK  &hto MCLK MOUSE
+        &ltm BLTH MB4 &ltm DEVICE MB5 &htp RCLK MCLK  &hto MCLK MOUSE
         &mkp LCLK                                     &ltm MOUSE RCLK
       >;
     };
