@@ -32,14 +32,14 @@
       compatible = "zmk,behavior-sticky-key";
       #binding-cells = <1>;
       bindings = <&mkp>;
-      release-after-ms = <5000>;
+      // release-after-ms = <5000>;
       quick-release;
     };
 
     mbl: mouse_button_long_press  {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
-      tapping_term_ms = <500>;
+      tapping_term_ms = <200>;
       flavor = "tap-preferred";
       bindings = <&skmk>, <&mkp>;
     };
