@@ -10,6 +10,7 @@
 #define SCRLH 2
 #define DEVICE 3
 #define BLTH 4
+#define SNIPE 5
 
 / {
   combos {
@@ -36,13 +37,21 @@
       tapping-term-ms = <200>;
       bindings = <&mo>, <&mkp>;
     };
+    mto: momentary-and-toggle {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      hold-while-undecided;
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&to>;
+    };
   };
   keymap {
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
         &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &lhm SCRLM RCLK
-        &mkp LCLK                               &lhm SCRLM RCLK
+        &mkp LCLK                               &mto SCRLM SNIPE
       >;
     };
     scroll_tap_layer {
@@ -67,6 +76,12 @@
       bindings = <
         &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2
         &bt BT_SEL 3                     &bt BT_SEL 4
+      >;
+    };
+    snipe_layer {
+      bindings = <
+        &trans &trans &trans &to DEFAULT
+        &trans               &to DEFAULT
       >;
     };
   };
