@@ -72,7 +72,7 @@
 
         /*   optional features   */
         // snipe-layers = <1>;
-        scroll-layers = <1>;
+        scroll-layers = <1 2>;
         //automouse-layer = <2>;
     };
 };
