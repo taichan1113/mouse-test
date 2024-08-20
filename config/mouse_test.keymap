@@ -49,13 +49,21 @@
       tapping-term-ms = <200>;
       bindings = <&mo>, <&mkp>;
     };
+    lhm: layer-tap-hold-or-mouse {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      hold-while-undecided;
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&mkp>;
+    };
     mto: momentary-and-toggle {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "hold-preferred";
       hold-while-undecided;
-      retro-tap;
-      tapping-term-ms = <200>;
+      // retro-tap;
+      tapping-term-ms = <3000>;
       bindings = <&mo>, <&to>;
     };
   };
@@ -63,14 +71,14 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &ltm SCRL RCLK 
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &lhm SCRL RCLK 
         &mkp LCLK                               &mto SCRL SCRL
       >;
     };
     scroll_layer {
       bindings = <
         &trans &trans &trans &to DEFAULT
-        &trans               &trans
+        &trans               &to DEFAULT
       >;
     };
     device_layer {
