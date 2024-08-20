@@ -12,6 +12,14 @@
 #define BLTH 4
 
 / {
+  combos {
+    compatible = "zmk,combos";
+    combo_esc {
+      timeout-ms = <50>;
+      key-positions = <2 3>;
+      bindings = <&mkp RCLK>;
+    };
+  };
   behaviors {
     ltm: layer-tap-or-mouse {
       compatible = "zmk,behavior-hold-tap";
@@ -28,15 +36,6 @@
       tapping-term-ms = <200>;
       bindings = <&mo>, <&mkp>;
     };
-    // mto: momentary-and-toggle {
-    //   compatible = "zmk,behavior-hold-tap";
-    //   #binding-cells = <2>;
-    //   flavor = "hold-preferred";
-    //   // hold-while-undecided;
-    //   // retro-tap;
-    //   tapping-term-ms = <3000>;
-    //   bindings = <&mo>, <&to>;
-    // };
   };
   keymap {
     compatible = "zmk,keymap";
