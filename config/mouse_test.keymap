@@ -6,44 +6,12 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define DEFAULT 0
-#define MOUSE 1
+#define SCRL 1
 #define DEVICE 2
 #define BLTH 3
 
 / {
   behaviors {
-    ltm: layer-tap-or-mouse {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "hold-preferred";
-      hold-while-undecided;
-      tapping-term-ms = <200>;
-      bindings = <&mo>, <&mkp>;
-    };
-    hto: hold-or-toggle {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "hold-preferred";
-      hold-while-undecided;
-      tapping-term-ms = <200>;
-      bindings = <&mkp>, <&to>;
-    };
-    htp: hold-and-tap {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "hold-preferred";
-      hold-while-undecided;
-      tapping-term-ms = <200>;
-      bindings = <&mkp>, <&mkp>;
-    };
-    mto: momentary-and-toggle {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "hold-preferred";
-      hold-while-undecided;
-      tapping-term-ms = <200>;
-      bindings = <&mo>, <&to>;
-    };
     // skmk: sticky_mouse_key {
     //   compatible = "zmk,behavior-sticky-key";
     //   #binding-cells = <1>;
@@ -58,16 +26,47 @@
     //   flavor = "tap-preferred";
     //   bindings = <&skmk>, <&mkp>;
     // };
+    // hto: hold-or-toggle {
+    //   compatible = "zmk,behavior-hold-tap";
+    //   #binding-cells = <2>;
+    //   flavor = "hold-preferred";
+    //   // hold-while-undecided;
+    //   tapping-term-ms = <200>;
+    //   bindings = <&mkp>, <&to>;
+    // };
+    // htp: hold-and-tap {
+    //   compatible = "zmk,behavior-hold-tap";
+    //   #binding-cells = <2>;
+    //   flavor = "hold-preferred";
+    //   // hold-while-undecided;
+    //   tapping-term-ms = <200>;
+    //   bindings = <&mkp>, <&mkp>;
+    // };
+    ltm: layer-tap-or-mouse {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&mkp>;
+    };
+    mto: momentary-and-toggle {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      hold-while-undecided;
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&to>;
+    };
   };
   keymap {
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &htp RCLK MCLK  &hto MCLK MOUSE
-        &mkp LCLK                                     &ltm MOUSE RCLK
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mto SCRL SCRL &mkp MCLK
+        &mkp LCLK                                    &mkp RCLK
       >;
     };
-    mouse_layer {
+    scroll_layer {
       bindings = <
         &trans &trans &trans &to DEFAULT
         &trans               &trans
