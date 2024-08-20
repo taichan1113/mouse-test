@@ -56,8 +56,8 @@
     };
     scroll_tap_layer {
       bindings = <
-        &trans &trans &trans &to DEFAULT
-        &to SCRLH            &to DEFAULT
+        &trans &trans &to SCRLH &trans
+        &to SCRLH               &trans
       >;
     };
     scroll_hold_layer {
