@@ -80,7 +80,7 @@
     };
     snipe_layer {
       bindings = <
-        &trans &trans &trans &to DEFAULT
+        &trans &trans &trans &trans
         &trans               &to DEFAULT
       >;
     };
