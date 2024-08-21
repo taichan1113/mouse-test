@@ -34,7 +34,7 @@
       #binding-cells = <2>;
       flavor = "hold-preferred";
       hold-while-undecided;
-      tapping-term-ms = <200>;
+      tapping-term-ms = <150>;
       bindings = <&mo>, <&mkp>;
     };
     mto: momentary-and-toggle {
@@ -80,7 +80,7 @@
     };
     snipe_layer {
       bindings = <
-        &trans &trans &trans &trans
+        &trans &trans &trans &lhm SCRLM RCLK
         &trans               &to DEFAULT
       >;
     };
