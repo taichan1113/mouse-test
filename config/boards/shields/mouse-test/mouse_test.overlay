@@ -71,8 +71,8 @@
         // duplex = <2048>; // required by 3-wire spi
 
         /*   optional features   */
-        // snipe-layers = <1>;
-        scroll-layers = <1>;
+        scroll-layers = <1 2>;
+        snipe-layers = <5>;
         //automouse-layer = <2>;
     };
 };
