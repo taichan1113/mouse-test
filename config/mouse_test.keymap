@@ -17,7 +17,7 @@
     compatible = "zmk,combos";
     combo_esc {
       timeout-ms = <50>;
-      key-positions = <2 3>;
+      key-positions = <4 5>;
       bindings = <&mkp RCLK>;
     };
   };
@@ -50,8 +50,8 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &lhm SCRLM RCLK
-        &mkp LCLK                               &mto SCRLM SNIPE
+        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &mkp MCLK
+        &mkp LCLK                               &lhm SCRLM RCLK
       >;
     };
     scroll_tap_layer {
