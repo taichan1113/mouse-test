@@ -72,6 +72,8 @@
 
         /*   optional features   */
         scroll-layers = <1 2>;
+           x-input-code = <INPUT_REL_X>;
+            y-input-code = <INPUT_REL_Y>;
         snipe-layers = <5>;
         //automouse-layer = <2>;
     };
