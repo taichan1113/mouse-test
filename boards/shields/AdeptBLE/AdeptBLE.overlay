@@ -1,4 +1,14 @@
+#include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
+
+// layers
+#define DEFAULT 0
+#define SCRLM 1
+#define SCRLH 2
+#define DEVICE 3
+#define BLTH 4
+#define SNIPE 5
 
 / {
     chosen {
@@ -30,9 +40,17 @@
     };
 };
 
+&gpio0 {
+    fastbatcharge: fast-battery-charge {
+        gpio-hog;
+        gpios = <13 GPIO_ACTIVE_HIGH>;
+        output-low;
+        line-name = "Fast Battery Charge";
+    };
+};
+
 &pinctrl {
     spi0_default: spi0_default {
-
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
                     <NRF_PSEL(SPIM_MOSI, 1, 14)>,
@@ -54,6 +72,10 @@
     status = "disabled";
 };
 
+&xiao_serial {
+    status = "disabled";
+};
+
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
@@ -68,19 +90,25 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        // duplex = <2048>; // required by 3-wire spi
-
-        /*   optional features   */
-        scroll-layers = <1 2>;
-        snipe-layers = <5>;
-        //automouse-layer = <2>;
+        cpi = <800>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
     };
 };
 
 / {
-  trackball_listener {
+  trackball_listener: trackball_listner {
     compatible = "zmk,input-listener";
     device = <&trackball>;
+
+    scroll {
+        layers = <SCRLM SCRLH>;
+        input-processors = <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>
+    };
+    snipe {
+        layers = <SNIPE>;
+        input-processors = <&zip_xy_scaler 1 5>;
+    };
   };
 }; 
-
