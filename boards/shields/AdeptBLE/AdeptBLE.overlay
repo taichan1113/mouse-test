@@ -104,7 +104,7 @@
 
     scroll {
         layers = <SCRLM SCRLH>;
-        input-processors = <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>
+        input-processors = <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>;
     };
     snipe {
         layers = <SNIPE>;
