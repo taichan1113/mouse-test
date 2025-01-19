@@ -2,6 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    # - name: grassfedreeve
+    #   url-base: https://github.com/grassfedreeve
     - name: badjeff
       url-base: https://github.com/badjeff
   projects:
@@ -9,6 +11,9 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    # - name: zmk-keyboards-adept
+    #   remote: grassfedreeve
+    #   revision: main
     - name: zmk-pmw3610-driver
       remote: badjeff
       revision: main
