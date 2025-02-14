@@ -4,13 +4,15 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: cyboard
+      url-base: https://github.com/Cyboard-DigitalTailor
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
     - name: zmk-pmw3610-driver
-      remote: badjeff
-      revision: main
+      remote: cyboard
+      revision: startup_optimization
   self:
     path: config
