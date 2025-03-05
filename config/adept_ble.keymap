@@ -8,21 +8,43 @@
 #define DEFAULT 0
 #define SCRLM 1
 #define SCRLH 2
-#define DEVICE 3
+#define NAV 3
 #define BLTH 4
 #define SNIPE 5
+#define DESKTOPS 6
+
+&sl {
+    release-after-ms = <2000>;
+};
 
 / {
   combos {
     compatible = "zmk,combos";
-    combo_esc {
+    combo_mclick {
       timeout-ms = <50>;
       key-positions = <2 3>;
-      bindings = <&mkp RCLK>;
+      bindings = <&mkp MCLK>;
+    };
+    combo_snipe {
+      timeout-ms = <50>;
+      key-positions = <0 3>;
+      bindings = <&to SNIPE>;
+    };
+    combo_desktops {
+      timeout-ms = <50>;
+      key-positions = <4 5>;
+      bindings = <&sl DESKTOPS>;
     };
   };
   behaviors {
     ltm: layer-tap-or-mouse {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&mkp>;
+    };
+    ltk: layer-tap-or-key {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "tap-preferred";
@@ -37,6 +59,14 @@
       tapping-term-ms = <150>;
       bindings = <&mo>, <&mkp>;
     };
+    lhk: layer-tap-hold-or-key {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      hold-while-undecided;
+      tapping-term-ms = <150>;
+      bindings = <&mo>, <&kp>;
+    };
     mto: momentary-and-toggle {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
@@ -50,38 +80,44 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltm BLTH MB4 &ltm DEVICE MB5 &mkp MCLK &lhm SCRLM RCLK
-        &mkp LCLK                               &mto SCRLM SNIPE
+        &ltk BLTH C_AC_BACK &ltk NAV C_AC_FORWARD &mo SCRLM &mkp RCLK
+        &mkp LCLK                                           &mkp MB4
       >;
     };
     scroll_tap_layer {
       bindings = <
-        &trans &trans &to SCRLH &trans
-        &to SCRLH               &trans
+        &trans  &to SCRLH &trans &kp LGUI
+        &trans                   &trans
       >;
     };
     scroll_hold_layer {
       bindings = <
-        &trans &trans &trans &to DEFAULT
-        &trans               &to DEFAULT
+        &to DEFAULT      &trans &trans &to DEFAULT
+        &to DEFAULT               &to DEFAULT
       >;
     };
-    device_layer {
+    nav_layer {
       bindings = <
-        &bootloader &trans &trans &trans
-        &trans                    &bt BT_CLR
+        &kp RC(RS(TAB)) &trans &kp LC(TAB) &kp LG(W)
+        &trans                             &trans 
       >;
     };
     bluetooth_layer {
       bindings = <
         &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2
-        &bt BT_SEL 3                     &bt BT_SEL 4
+        &bt BT_CLR_ALL                     &bootloader
       >;
     };
     snipe_layer {
       bindings = <
-        &trans &trans &trans &lhm SCRLM RCLK
-        &trans               &to DEFAULT
+        &to DEFAULT &trans &mo SCRLM &mkp RCLK
+        &mkp LCLK                    &trans
+      >;
+    };
+    desktops_layer {
+      bindings = <
+        &kp LC(NUM_1) &kp LC(NUM_2) &kp LC(NUM_3) &kp LC(NUM_4)
+        &kp LC(NUM_5)               &kp LC(NUM_6)
       >;
     };
   };
