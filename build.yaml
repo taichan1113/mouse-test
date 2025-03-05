@@ -19,4 +19,4 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: mouse_test
+    shield: adept_ble
