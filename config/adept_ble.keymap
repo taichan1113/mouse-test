@@ -80,20 +80,20 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltk BLTH C_AC_BACK &ltk NAV C_AC_FORWARD &mo SCRLM &mkp RCLK
-        &mkp LCLK                                           &mkp MB4
+        &ltk BLTH LG(LBKT) &ltk NAV LG(RBKT) &mkp MB4 &mkp RCLK
+        &mkp LCLK                                           &mo SCRLM
       >;
     };
     scroll_tap_layer {
       bindings = <
-        &trans  &to SCRLH &trans &kp LGUI
-        &trans                   &trans
+        &trans  &to SCRLH &to SCRLH &kp LGUI
+        &trans                      &trans
       >;
     };
     scroll_hold_layer {
       bindings = <
-        &to DEFAULT      &trans &trans &to DEFAULT
-        &to DEFAULT               &to DEFAULT
+        &to DEFAULT      &trans &trans &trans
+        &trans               &trans
       >;
     };
     nav_layer {
@@ -110,8 +110,8 @@
     };
     snipe_layer {
       bindings = <
-        &to DEFAULT &trans &mo SCRLM &mkp RCLK
-        &mkp LCLK                    &trans
+        &to DEFAULT &trans &trans    &mkp RCLK
+        &mkp LCLK                    &mo SCRLM
       >;
     };
     desktops_layer {
