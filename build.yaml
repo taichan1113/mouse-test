@@ -20,5 +20,5 @@
 include:
   - board: seeeduino_xiao_ble
     shield: AdeptBLE
-    snippet: studio-rpc-usb-uart
+    # snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
