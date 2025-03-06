@@ -56,14 +56,14 @@
       >;
     };
     scroll_tap_layer {
-      display-name = "Scroll Momentary";
+      display-name = "Scroll-Momentary";
       bindings = <
         &trans &trans &to SCRLH &trans
         &to SCRLH               &trans
       >;
     };
     scroll_hold_layer {
-      display-name = "Scroll Keep";
+      display-name = "Scroll-Keep";
       bindings = <
         &trans &trans &trans &to DEFAULT
         &trans               &to DEFAULT

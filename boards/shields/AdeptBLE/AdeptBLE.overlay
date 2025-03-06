@@ -110,24 +110,34 @@
 };
 
 &spi0 {
-    status = "okay";
     compatible = "nordic,nrf-spim";
+    status = "disabled";
+
+
+    trackball: trackball@0 {
+        compatible = "pixart,pmw3610";
+        status = "disabled";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+    };
+    // };
+};
+
+&spi0 {
+    status = "okay";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
     cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;
+};
 
-    trackball: trackball@0 {
-        status = "okay";
-        compatible = "pixart,pmw3610";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <800>;
-        evt-type = <INPUT_EV_REL>;
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
-    };
+&trackball {
+    status = "okay";
+    irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    cpi = <800>;
+    evt-type = <INPUT_EV_REL>;
+    x-input-code = <INPUT_REL_X>;
+    y-input-code = <INPUT_REL_Y>;
 };
 
 / {
@@ -136,13 +146,19 @@
     device = <&trackball>;
     input-processors = <&zip_xy_swap_mapper>;
 
+    default {
+        layers = <DEFAULT>;
+        process-next;
+    };
     scroll {
         layers = <SCRLM SCRLH>;
-        input-processors = <&zip_xy_swap_mapper>, <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>;
+        prcess-next;
     };
     snipe {
         layers = <SNIPE>;
-        input-processors = <&zip_xy_swap_mapper>, <&zip_xy_scaler 1 5>;
+        input-processors = <&zip_xy_scaler 1 5>;
+        process-next;
     };
   };
 }; 
