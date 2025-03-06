@@ -7,3 +7,4 @@ requires: [seeeduino_xiao_ble]
 features:
   - keys
   - pointer
+  - studio
