@@ -1,6 +1,8 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 // layers
 #define DEFAULT 0
@@ -13,7 +15,7 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        zmk,physical-layout = &physical_layout0;
     };
 
     kscan0: kscan {
@@ -37,6 +39,37 @@
             RC(0,0) RC(0,1) RC(0,2) RC(0,3)
             RC(0,4) RC(0,5)
         >;
+    };
+
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs  50 100    0    0       0     0     0>
+            , <&key_physical_attrs  50  50   50    0       0     0     0>
+            , <&key_physical_attrs  50  50  100    0       0     0     0>
+            , <&key_physical_attrs  50 100  150    0       0     0     0>
+            , <&key_physical_attrs  75 100    0  100       0     0     0>
+            , <&key_physical_attrs  75 100  125  100       0     0     0>
+            ;
+    };
+
+    position_map {
+        compatible = "zmk,physical-layout-position-map";
+
+        complete;
+
+        layout1: layout1 {
+            physical-layout = <&physical_layout0>;
+            positions
+                = < 0  1  2  3>
+                , < 4        5>
+                ;
+        };
     };
 };
 
