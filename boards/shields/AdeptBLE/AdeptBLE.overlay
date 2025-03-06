@@ -74,6 +74,11 @@
     // };
 };
 
+&physical_layout0 {
+    kscan = <&kscan0>;
+    transform = <&default_transform>;
+};
+
 &gpio0 {
     fastbatcharge: fast-battery-charge {
         gpio-hog;
