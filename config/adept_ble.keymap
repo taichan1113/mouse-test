@@ -27,7 +27,7 @@
     };
     combo_snipe {
       timeout-ms = <50>;
-      key-positions = <0 3>;
+      key-positions = <0 1>;
       bindings = <&to SNIPE>;
     };
     combo_desktops {
@@ -49,7 +49,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&mo>, <&mkp>;
+      bindings = <&mo>, <&kp>;
     };
     lhm: layer-tap-hold-or-mouse {
       compatible = "zmk,behavior-hold-tap";
@@ -80,20 +80,20 @@
     compatible = "zmk,keymap";
     default_layer {
       bindings = <
-        &ltk BLTH LG(LBKT) &ltk NAV LG(RBKT) &mkp MB4 &mkp RCLK
-        &mkp LCLK                                           &mo SCRLM
+        &ltk BLTH LG(LBKT) &ltk NAV LG(RBKT) &mkp RCLK &mo SCRLM
+        &mkp LCLK                                           &mkp MB4
       >;
     };
     scroll_tap_layer {
       bindings = <
-        &trans  &to SCRLH &to SCRLH &kp LGUI
-        &trans                      &trans
+        &trans  &trans &to SCRLH &trans
+        &trans                      &kp LGUI
       >;
     };
     scroll_hold_layer {
       bindings = <
         &to DEFAULT      &trans &trans &trans
-        &trans               &trans
+        &to DEFAULT               &trans
       >;
     };
     nav_layer {
@@ -110,8 +110,8 @@
     };
     snipe_layer {
       bindings = <
-        &to DEFAULT &trans &trans    &mkp RCLK
-        &mkp LCLK                    &mo SCRLM
+        &to DEFAULT &trans &trans &trans
+        &trans                    &trans
       >;
     };
     desktops_layer {
