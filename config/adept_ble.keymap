@@ -99,7 +99,7 @@
     nav_layer {
       bindings = <
         &kp RC(RS(TAB)) &trans &kp LC(TAB) &kp LG(W)
-        &trans                             &trans 
+        &kp F5                             &trans 
       >;
     };
     bluetooth_layer {
