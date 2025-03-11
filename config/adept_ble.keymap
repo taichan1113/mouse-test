@@ -86,8 +86,8 @@
     };
     scroll_tap_layer {
       bindings = <
-        &trans  &trans &to SCRLH &trans
-        &trans                      &kp LGUI
+        &trans  &to SCRLH &kp LGUI &trans
+        &trans                      &trans
       >;
     };
     scroll_hold_layer {
