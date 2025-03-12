@@ -29,16 +29,6 @@
             RC(0,4) RC(0,5)
         >;
     };
-
-    xiao_battery_voltage_divider: vbatt {
-        status = "okay";
-        compatible = "zmk,battery-voltage-divider";
-        label = "XIAO voltage divider";
-        io-channels = <&adc 7>;
-        output-ohms = <470000>;
-        full-ohms =  <1470000>;
-        power-gpios = <&gpio0 14 (GPIO_ACTIVE_LOW)>;
-    };
 };
 
 &pinctrl {
@@ -79,12 +69,17 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <400>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+
         // duplex = <2048>; // required by 3-wire spi
 
-        /*   optional features   */
+        /*   optional features   
         scroll-layers = <1 2>;
         snipe-layers = <5>;
-        //automouse-layer = <2>;
+        //automouse-layer = <2>; */
     };
 };
 
