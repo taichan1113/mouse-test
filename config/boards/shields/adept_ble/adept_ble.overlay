@@ -4,7 +4,6 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
-        zmk,battery = &xiao_battery_voltage_divider;
     };
 
     kscan0: kscan {
