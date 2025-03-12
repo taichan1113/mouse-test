@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
@@ -87,6 +88,16 @@
   trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
+    
+    scroller {
+        layers = <1 2>;
+        input-processors = <&zip_xy_to_scroll_mapper>;
+    };
+
+    snipe {
+        layers = <5>;
+        input-processors = <&zip_xy_scaler 1 2>;
+    };
   };
 }; 
 

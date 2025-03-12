@@ -4,7 +4,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <input/processors.dtsi>
 
 #define DEFAULT 0
 #define SCRLM 1
@@ -13,18 +12,6 @@
 #define BLTH 4
 #define SNIPE 5
 #define DESKTOPS 6
-
-&trackball_listener {
-    scroller {
-        layers = <1 2>;
-        input-processors = <&zip_xy_to_scroll_mapper>;
-    };
-
-    snipe {
-        layers = <5>;
-        input-processors = <&zip_xy_scaler 1 2>;
-    }
-};
 
 &sl {
     release-after-ms = <2000>;
