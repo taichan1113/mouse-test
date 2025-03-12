@@ -1,6 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 / {
     chosen {
@@ -91,7 +92,7 @@
 
     scroller {
         layers = <1 2>;
-        input-processors = <&zip_xy_to_scroll_mapper &zip_scroll_scaler 1 4>;
+        input-processors = <&zip_xy_scaler 1 8 &zip_xy_to_scroll_mapper &zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>;
     };
 
     snipe {
