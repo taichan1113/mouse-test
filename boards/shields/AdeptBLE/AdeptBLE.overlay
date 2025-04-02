@@ -1,0 +1,156 @@
+#include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+// layers
+#define DEFAULT 0
+#define SCRLM 1
+#define SCRLH 2
+#define DEVICE 3
+#define BLTH 4
+#define SNIPE 5
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        input-gpios
+            = <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            ;
+    };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        rows = <2>;
+        columns = <4>;
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+            RC(0,4) RC(0,5)
+        >;
+    };
+
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs  50 100    0    0       0     0     0>
+            , <&key_physical_attrs  50  50   50    0       0     0     0>
+            , <&key_physical_attrs  50  50  100    0       0     0     0>
+            , <&key_physical_attrs  50 100  150    0       0     0     0>
+            , <&key_physical_attrs  75 100    0  100       0     0     0>
+            , <&key_physical_attrs  75 100  125  100       0     0     0>
+            ;
+    };
+
+    position_map {
+        compatible = "zmk,physical-layout-position-map";
+
+        complete;
+
+        layout1: layout1 {
+            physical-layout = <&physical_layout0>;
+            positions
+                = < 0  1  2  3>
+                , < 4        5>
+                ;
+        };
+    };
+};
+
+&gpio0 {
+    fastbatcharge: fast-battery-charge {
+        gpio-hog;
+        gpios = <13 GPIO_ACTIVE_HIGH>;
+        output-low;
+        line-name = "Fast Battery Charge";
+    };
+};
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 14)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 14)>;
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 14)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 14)>;
+            low-power-enable;
+        };
+    };
+};
+
+&uart0 {
+    status = "disabled";
+};
+
+&xiao_serial {
+    status = "disabled";
+};
+
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&xiao_d 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <800>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+
+        force-awake;
+    };
+};
+
+/ {
+  trackball_listener: trackball_listner {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+    input-processors = <&zip_xy_swap_mapper>;
+
+    default {
+        layers = <DEFAULT>;
+        process-next;
+    };
+    scroll {
+        layers = <SCRLM SCRLH>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 10>, <&zip_xy_to_scroll_mapper>, <&zip_xy_swap_mapper>;
+        process-next;
+    };
+    snipe {
+        layers = <SNIPE>;
+        input-processors = <&zip_xy_scaler 1 5>;
+        process-next;
+    };
+  };
+}; 

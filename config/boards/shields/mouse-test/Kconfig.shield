@@ -1,2 +1,0 @@
-config SHIELD_MOUSE_TEST
-    def_bool $(shields_list_contains,mouse_test)

@@ -1,7 +1,7 @@
-if SHIELD_MOUSE_TEST
+if SHIELD_ADEPTBLE
 
 config ZMK_KEYBOARD_NAME
-    default "mouse_test"
+    default "AdeptBLE"
 
 endif
 
